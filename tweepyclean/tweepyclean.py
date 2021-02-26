@@ -107,9 +107,9 @@ def sentiment_total(data, lexicon):
     disgust        4901            207
     """
 
-def tweet_engagement_hour(tweets):
+def engagement_by_hour(tweets):
     """
-    Creates a line chart of total number of likes, comments and retweets received by hour of tweet posted.
+    Creates a line chart of total number of likes and retweets received by hour of tweet posted.
     
     Parameters
     ----------

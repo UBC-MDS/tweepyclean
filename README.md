@@ -28,7 +28,8 @@ The official documentation is hosted on Read the Docs: https://tweepyclean.readt
 
 ## Contributors
 
-We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab](https://github.com/syadk/tweepyclean/graphs/contributors).
+We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab].
+This repository is currently maintained by @nashmakh, @calsvein, @MattTPin, @syak.
 
 ### Credits
 

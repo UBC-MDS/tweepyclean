@@ -10,12 +10,18 @@ def raw_tweets(tweets):
     Returns
     -------
     tweets_df: pandas.core.frame.DataFrame
-        Dataframe with labeled columns containing the id, created_at, full_text, favorite_count, retweet_count, retweeted, entities, in_reply_to_user_id, and source columns from the iterator
+        Dataframe with up to 31 labeled columns based on the info stored in the ItemIterator.
     
     Examples:
     --------
     #>>> raw_df(tweets)
     """
+    import pandas as pd
+
+    tweet_search_results = []
+    for status in tweets:
+        tweet_search_results.append(status._json)
+    return(pd.DataFrame(tweet_search_results))
 
 def clean_tweets(tweets, handle = "", text_only = True, emojis = True, hashtags = True, sentiment = True, flesch_readability = True, media_links = True, proportion_of_avg_retweets = True, proportion_of_avg_hearts = True):
     """

@@ -46,7 +46,9 @@ def test_tweet_words():
             
     # check if function returns the correct dataframe for example data
     pd.testing.assert_frame_equal(actual_output,expected_output)
-    
+    pd.testing.assert_frame_equal(tweepyclean.tweet_words(clean_data, 1),
+                                  pd.DataFrame({'words' : ['tweet'],
+                                    'count' : [4]}))
 
     
 

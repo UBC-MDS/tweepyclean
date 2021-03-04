@@ -15,9 +15,6 @@ def load_clean_data():
     clean_dataframe = pd.read_csv('tests/clean_df_example_tweets.csv')
     return clean_dataframe
 
-def test_tweet_words():
-    clean_data = load_clean_data()
-    assert(5 == 5)
-    
+
 
 

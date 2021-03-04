@@ -49,12 +49,38 @@ def test_tweet_words():
     pd.testing.assert_frame_equal(tweepyclean.tweet_words(clean_data, 1),
                                   pd.DataFrame({'words' : ['tweet'],
                                   'count' : [4]}))
-    pd.testing.assert_frame_equal(tweepyclean.tweet_words(clean_data, 1000),
-                                  pd.DataFrame({'words' : ['tweet'],
-                                    'count' : [4]}))
     pd.testing.assert_frame_equal(tweepyclean.tweet_words(clean_data),
                                   pd.DataFrame({'words' : ['tweet'],
                                     'count' : [4]}))
+    pd.testing.assert_frame_equal(tweepyclean.tweet_words(clean_data, 1000),
+                                  pd.DataFrame({'words': {0: 'tweet',
+                                                          1: 'is',
+                                                          2: 'this',
+                                                          3: 'example',
+                                                          4: 'words',
+                                                          5: 'with',
+                                                          6: 'third',
+                                                          7: 'fifth',
+                                                          8: 'few',
+                                                          9: 'extra',
+                                                          10: 'a',
+                                                          11: '4th',
+                                                          12: '2',
+                                                          13: '1'},
+                                                         'count': {0: 4,
+                                                          1: 3,
+                                                          2: 2,
+                                                          3: 2,
+                                                          4: 1,
+                                                          5: 1,
+                                                          6: 1,
+                                                          7: 1,
+                                                          8: 1,
+                                                          9: 1,
+                                                          10: 1,
+                                                          11: 1,
+                                                          12: 1,
+                                                          13: 1}}))
     
 
     

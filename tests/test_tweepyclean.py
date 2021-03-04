@@ -48,7 +48,14 @@ def test_tweet_words():
     pd.testing.assert_frame_equal(actual_output,expected_output)
     pd.testing.assert_frame_equal(tweepyclean.tweet_words(clean_data, 1),
                                   pd.DataFrame({'words' : ['tweet'],
+                                  'count' : [4]}))
+    pd.testing.assert_frame_equal(tweepyclean.tweet_words(clean_data, 1000),
+                                  pd.DataFrame({'words' : ['tweet'],
                                     'count' : [4]}))
+    pd.testing.assert_frame_equal(tweepyclean.tweet_words(clean_data),
+                                  pd.DataFrame({'words' : ['tweet'],
+                                    'count' : [4]}))
+    
 
     
 

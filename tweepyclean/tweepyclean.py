@@ -65,7 +65,11 @@ def clean_tweets(tweets, handle = "", text_only = True, emojis = True, hashtags 
 def tweet_words(clean_dataframe, top_n=1):
 	
     """
-	Returns the most common words and counts from a list of tweets
+	Returns the most common words and counts from a list of tweets.
+    
+    The output is sorted descending by the count of words and in reverse
+    alphabetical order for any word ties.
+    
 	
     Parameters
 	----------
@@ -108,6 +112,10 @@ def tweet_words(clean_dataframe, top_n=1):
     output.reset_index(inplace=True, drop=True)
     output.rename(columns={'text_only': 'count'}, inplace=True)
     output = output[['words', 'count']]
+    
+    # sort by alphabetical while preserving numerical sort
+    output = output.sort_values(['count', 'words'], ascending=False)
+    output.reset_index(inplace=True, drop=True)    
     
     # select top_n
     if top_n > output.shape[0]:

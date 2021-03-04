@@ -25,9 +25,10 @@ def test_tweet_words():
                                    '4th tweet',
                                    'fifth tweet']})
     
-    expected_output = pd.DataFrame({'word' : ['tweet', 'is', 'this'],
+    expected_output = pd.DataFrame({'words' : ['tweet', 'is', 'this'],
                                     'count' : [4, 3, 2]})
     
+    actual_output = tweepyclean.tweet_words(clean_data, 3)
     # check if the output is a dataframe
     assert (isinstance(tweepyclean.tweet_words(clean_data, 3), pd.DataFrame))
     
@@ -41,7 +42,8 @@ def test_tweet_words():
         tweepyclean.tweet_words(clean_data, pd.DataFrame())
         
     # check if function returns the correct dataframe for example
-    assert (tweepyclean.tweet_words(clean_data, 3).equals(expected_output))
+    #assert (tweepyclean.tweet_words(clean_data, 3).equals(expected_output))
+    assert (actual_output.equals(expected_output))
     
     # check if user requests inputs to show 0 top words
     with raises(ValueError):

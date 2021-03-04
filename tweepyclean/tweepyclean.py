@@ -118,8 +118,8 @@ def tweet_words(clean_dataframe, top_n=1):
     output.reset_index(inplace=True, drop=True)    
     
     # select top_n
-    if top_n > output.shape[0]:
-        output = output.iloc[0, :]
+    if top_n >= output.shape[0]:
+        output = output
     else:
         output = output.iloc[0:top_n, :]
     

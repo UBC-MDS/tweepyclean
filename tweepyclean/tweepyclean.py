@@ -1,4 +1,5 @@
 import pandas as pd
+import altair as alt
 
 def raw_tweets(tweets):
     """
@@ -183,9 +184,9 @@ def sentiment_total(data, drop_sentiment = False):
 
 
 
-def engagement_by_hour(tweets):
+def engagement_by_hour(tweets_df):
     """
-    Creates a line chart of total number of likes and retweets received by hour of tweet posted.
+    Creates a line chart of average number of likes and retweets received based on hour of tweet posted.
     
     Parameters
     ----------
@@ -194,11 +195,31 @@ def engagement_by_hour(tweets):
     
     Returns
     -------
-    An Altair graph object (line chart) of total engagement received by hour of tweet posted
+    An Altair graph object (line chart) of average engagement received by hour of tweet posted
     
     Examples
     --------
     #>>> engagement_by_hour(tweets_df)
     """
+    
+    # check input type of tweets_df
+    if not isinstance(tweets_df, pd.DataFrame):
+        raise TypeError("Input should be of type pd.DataFrame")
+    
+    #Wrangle data
+#     df = pd.read_csv(tweets)
+    tweets_df['created_at']= tweets_df.to_datetime(tweets_df['created_at'])
+    tweets_df['hour'] = tweets_df.created_at.dt.hour
+    tweets_df['total_engagement'] = tweets_df['retweet_count'] + tweets_df['favorite_count']
+    grouped_df = tweets_df.groupby('hour')['total_engagement'].mean().reset_index()
+    
+    #Plot chart
+    chart = alt.Chart(grouped_df, title = 'Average engagement (likes + retweets) by hour').mark_line(
+    ).encode(
+        alt.X('hour', title='Time (Hour of day)'),
+        alt.Y('total_engagement', title='Average engagement')
+    )
+    
+    return chart
 
 

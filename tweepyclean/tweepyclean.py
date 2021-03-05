@@ -62,16 +62,7 @@ def clean_tweets(tweets, handle = "", text_only = True, emojis = True, hashtags 
     #>>> extra_cols(tweets_df, emojis = False, hashtags = False, sentiment = False)
     """
 
-<<<<<<< HEAD
-def tweet_words(clean_dataframe, top_n=1):
-=======
-
-
-
-
-def tweet_words(clean_dataframe, top_n):
->>>>>>> main
-	
+def tweet_words(clean_dataframe, top_n=1):	
     """
 	Returns the most common words and counts from a list of tweets.
     
@@ -97,7 +88,7 @@ def tweet_words(clean_dataframe, top_n):
 
 	pd.DataFrame(data = {'words' : ['best', 'apple', 'news'], 'count' : [102, 52, 24]}) 
     """
-<<<<<<< HEAD
+
     # check input type of clean_dataframe
     if not isinstance(clean_dataframe, pd.DataFrame):
         raise TypeError("clean_dataframe should be of type pd.DataFrame")
@@ -134,12 +125,8 @@ def tweet_words(clean_dataframe, top_n):
     
     return output
   
-  
-def sentiment_total(data, lexicon):
-=======
 
 def sentiment_total(data, drop_sentiment = False):
->>>>>>> main
 
     """
     Takes an input of of single english words and outputs the number of words associated 

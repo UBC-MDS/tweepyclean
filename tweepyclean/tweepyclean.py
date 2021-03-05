@@ -62,7 +62,15 @@ def clean_tweets(tweets, handle = "", text_only = True, emojis = True, hashtags 
     #>>> extra_cols(tweets_df, emojis = False, hashtags = False, sentiment = False)
     """
 
+<<<<<<< HEAD
 def tweet_words(clean_dataframe, top_n=1):
+=======
+
+
+
+
+def tweet_words(clean_dataframe, top_n):
+>>>>>>> main
 	
     """
 	Returns the most common words and counts from a list of tweets.
@@ -89,6 +97,7 @@ def tweet_words(clean_dataframe, top_n=1):
 
 	pd.DataFrame(data = {'words' : ['best', 'apple', 'news'], 'count' : [102, 52, 24]}) 
     """
+<<<<<<< HEAD
     # check input type of clean_dataframe
     if not isinstance(clean_dataframe, pd.DataFrame):
         raise TypeError("clean_dataframe should be of type pd.DataFrame")
@@ -127,16 +136,27 @@ def tweet_words(clean_dataframe, top_n=1):
   
   
 def sentiment_total(data, lexicon):
+=======
+
+def sentiment_total(data, drop_sentiment = False):
+>>>>>>> main
 
     """
-    Takes unaggregated tweet data and summarizes the number of tweeted words associated with particular emotional sentiments.
-
+    Takes an input of of single english words and outputs the number of words associated 
+    with eight emotions and positive/negative sentiment. This is based on the the 
+    crowd-sourced NRC Emotion Lexicon, which associates words with eight basic emotions 
+    (anger, fear, anticipation, trust, surprise, sadness, joy, and disgust) and two 
+    sentiments (negative and positive). For more information on NRC: 
+    http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm
+    
+    Note that words can be 0:n with emotions (either associated with none, 1, or many).
+    
     Parameters:
     -------
-    data: pandas.DataFrame 
-        unaggregated tweet data. Obtained from using most_common().
-    lexicon: string or list
-        the particular sentiments the user selects.
+    data: pandas.DataFrame or np.array
+        A list or single column dataframe of single words.
+    drop_sentiment: boolean
+        drop emotion/sentiment rows if no words are associated with them. Default is False.
                     
     Returns:
     --------
@@ -144,15 +164,37 @@ def sentiment_total(data, lexicon):
 
     Examples:
     ---------
-    #>>> sentiment(df, “nrc”)
+    #>>> sentiment(df, drop_sentiment = True)
 
-    A tibble: 3 x 3
-    sentiment      total_words     words
-    <chr>          <int>           <dbl>
-    anger          4901            321
-    anticipation   4901            256
-    disgust        4901            207
+    3 x 5
+    sentiment      word_count  total_words
+    <chr>          <int>       <dbl>
+    anger          1            4
+    disgust        2            4
+    fear           1            4
+    negative       2            4
+    sadness        1            4
     """
+    
+    # delete once I get a function to get list of tweet word from clean_df 
+    tweet_words = pd.DataFrame({"word": ["bad", "thrilled", "pissed", "gross"]})
+    
+    total_words = len(data)
+    emotion_lexicon_df = pd.read_csv("data/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt", sep = "\t") #NRC dataset
+
+    tweet_words_sentiment = pd.merge(data, emotion_lexicon_df, how = 'inner')
+    
+    #if user deviates from default parameter drop 0 count sentiments
+    if drop_sentiment == True:  
+        tweet_words_sentiment = tweet_words_sentiment[tweet_words_sentiment['count'] == 1]
+        
+    # get aggregated sentiment-words counts
+    tweet_words_sentiment = tweet_words_sentiment.groupby(['sentiment'], as_index = False).sum()
+    tweet_words_sentiment = tweet_words_sentiment.rename(columns = {'count': 'word_count'})
+    tweet_words_sentiment['total_words'] = total_words
+    return tweet_words_sentiment
+
+
 
 def engagement_by_hour(tweets):
     """

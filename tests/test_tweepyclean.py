@@ -16,7 +16,7 @@ def load_clean_data():
     clean_dataframe = pd.read_csv('tests/clean_df_example_tweets.csv')
     return clean_dataframe
 
-<<<<<<< HEAD
+
 def test_tweet_words():
     clean_data = pd.DataFrame({'id' : [1,2,3,4,5],
                                'text_only' : [
@@ -82,13 +82,6 @@ def test_tweet_words():
                                                           11: 1,
                                                           12: 1,
                                                           13: 1}}))
-    
 
-    
-
-    
-=======
-
->>>>>>> main
 
 

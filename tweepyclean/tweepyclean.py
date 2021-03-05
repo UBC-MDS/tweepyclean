@@ -207,8 +207,7 @@ def engagement_by_hour(tweets_df):
         raise TypeError("Input should be of type pd.DataFrame")
     
     #Wrangle data
-#     df = pd.read_csv(tweets)
-    tweets_df['created_at']= tweets_df.to_datetime(tweets_df['created_at'])
+    tweets_df['created_at']= pd.to_datetime(tweets_df['created_at'])
     tweets_df['hour'] = tweets_df.created_at.dt.hour
     tweets_df['total_engagement'] = tweets_df['retweet_count'] + tweets_df['favorite_count']
     grouped_df = tweets_df.groupby('hour')['total_engagement'].mean().reset_index()
@@ -216,10 +215,8 @@ def engagement_by_hour(tweets_df):
     #Plot chart
     chart = alt.Chart(grouped_df, title = 'Average engagement (likes + retweets) by hour').mark_line(
     ).encode(
-        alt.X('hour', title='Time (Hour of day)'),
-        alt.Y('total_engagement', title='Average engagement')
+        alt.X('hour'),
+        alt.Y('total_engagement')
     )
     
     return chart
-
-

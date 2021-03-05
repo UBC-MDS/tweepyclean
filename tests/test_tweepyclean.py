@@ -1,6 +1,7 @@
 from tweepyclean import __version__
 from tweepyclean import tweepyclean
 import pandas as pd
+import altair as alt
 from pytest import raises
 
 def test_version():
@@ -84,4 +85,44 @@ def test_tweet_words():
                                                           13: 1}}))
 
 
+def test_engagement_by_hour():
+    
+    test_data = pd.DataFrame({'created_at' : ['Sun Feb 28 16:16:35 +0000 2021', 'Sun Feb 28 14:34:00 +0000 2021',
+                                              'Wed Feb 24 19:17:38 +0000 2021', 'Tue Feb 23 17:41:37 +0000 2021'],
+                               'retweet_count' : [12, 25, 15, 4],
+                                'favorite_count' : [20, 23, 33, 24]})
+    
+    output = tweepyclean.engagement_by_hour()
+    
+    assert output.encoding.x.field == 'hour', 'x_axis should be mapped to the x axis'
+    assert output.encoding.y.field == 'total_engagement', 'y_axis should be mapped to the y axis'
+    assert output.mark == 'line', 'mark should be a line'
+    assert type(output) == 'altair.vegalite.v4.api.Chart', "chart should be Altair object"
+
+# check input type raises error when it should
+    with raises(TypeError):
+        tweepyclean.tweet_words(clean_data, pd.DataFrame())
+
+def test_engagement_by_hour():
+    
+    test_data = pd.DataFrame({'created_at' : ['Sun Feb 28 16:16:35 +0000 2021', 'Sun Feb 28 14:34:00 +0000 2021',
+                                              'Wed Feb 24 19:17:38 +0000 2021', 'Tue Feb 23 17:41:37 +0000 2021'],
+                               'retweet_count' : [12, 25, 15, 4],
+                                'favorite_count' : [20, 23, 33, 24]})
+    
+    output = tweepyclean.engagement_by_hour()
+    
+    assert output.encoding.x.field == 'hour', 'x_axis should be mapped to the x axis'
+    assert output.encoding.y.field == 'total_engagement', 'y_axis should be mapped to the y axis'
+    assert output.mark == 'line', 'mark should be a line'
+    assert type(output) == 'altair.vegalite.v4.api.Chart', "chart should be Altair object"
+
+# check input type raises error when it should
+    with raises(TypeError):
+        tweepyclean.tweet_words(clean_data, pd.DataFrame())
+
+
+
+
+    output = tweepyclean.engagement_by_hour()
 

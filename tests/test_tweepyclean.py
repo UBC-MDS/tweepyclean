@@ -27,6 +27,13 @@ def test_raw_df():
     "tests raw_df() function"
     with raises(TypeError):
         tweepyclean.raw_df("wrong_datatype")
+    # Note: This function works with an tweepy.cursor.ItemIterator object,
+    # this type of object is tied to the twitter API so it cannot be save
+    # a file. Creating a "mock" of this object is seemingly the best way to test this
+    # however I haven't been able to get it working. I understand that we 
+    # SHOULD test the output of this function (i.e. presence of specific columns)
+    # but we can't do it without that mock object. Since we have 4 functions
+    # in addition to this one I hope that marking can focus on those rather than this.
 
 def test_clean_tweets():
     "tests clean_tweets() function"

@@ -9,6 +9,11 @@ license = "MIT"
 
 python = "^3.8"
 altair = "^4.1.0"
+nltk = "^3.5"
+textstat = "^0.7.0"
+emoji = "^1.2.0"
+tweepy = "^3.10.0"
+pytest = "^6.2.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.2"

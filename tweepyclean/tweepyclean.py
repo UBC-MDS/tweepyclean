@@ -231,7 +231,7 @@ def tweet_words(clean_dataframe, top_n=1):
     
     return output
 
-def sentiment_total(data, drop_sentiment = False):
+def sentiment_total(tweets, drop_sentiment = False):
 
     """
     Takes an input of of single english words and outputs the number of words associated 
@@ -268,13 +268,14 @@ def sentiment_total(data, drop_sentiment = False):
     sadness        1            4
     """
     
-    # delete once I get a function to get list of tweet word from clean_df 
-    tweet_words = pd.DataFrame({"word": ["bad", "thrilled", "pissed", "gross"]})
+ 
+    text_column = 'text_only' 
+    tweet_words = pd.DataFrame({"word": tweets.str.split().explode()})
     
-    total_words = len(data)
+    total_words = len(tweet_words)
     emotion_lexicon_df = pd.read_csv("data/NRC-Emotion-Lexicon-Wordlevel-v0.92.txt", sep = "\t") #NRC dataset
 
-    tweet_words_sentiment = pd.merge(data, emotion_lexicon_df, how = 'inner')
+    tweet_words_sentiment = pd.merge(tweet_words, emotion_lexicon_df, how = 'inner')
     
     #if user deviates from default parameter drop 0 count sentiments
     if drop_sentiment == True:  
@@ -285,6 +286,7 @@ def sentiment_total(data, drop_sentiment = False):
     tweet_words_sentiment = tweet_words_sentiment.rename(columns = {'count': 'word_count'})
     tweet_words_sentiment['total_words'] = total_words
     return tweet_words_sentiment
+
 
 
 

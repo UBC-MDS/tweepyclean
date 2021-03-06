@@ -8,6 +8,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer # Needed for clean_t
 import textstat # Needed for clean_tweets() to generate flesch_readability score
 import emoji # Needed for clean_tweets() to extract emojis
 import tweepy # Needed to check for tweepy.cursor.ItemIterator object
+import numpy as np
 
 def test_version():
     assert __version__ == '0.1.0'
@@ -183,6 +184,36 @@ def test_tweet_words():
                                                           11: 1,
                                                           12: 1,
                                                           13: 1}}))
+
+
+def test_sentiment_total():
+    
+    tweets = pd.DataFrame({'id' : [1,2,3,4,5],
+                                   'text_only' : [
+                                       'this is example tweet 1',
+                                       'this is example tweet 2 with a few extra words',
+                                       'is third',
+                                       '4th tweet',
+                                       'fifth tweet']})
+    
+    output = tweepyclean.sentiment_total(tweets['text_only'], drop_sentiment = False)
+
+    # check that input is a dataframe
+    assert type(tweets) == pd.DataFrame, "input data needs to be a pd.DataFrame"
+    
+    # check that output is a dataframe
+    assert type(output) == pd.DataFrame, "output isn't a dataframe" 
+    
+    # check that 1st column is string type
+    assert type(output['sentiment'][1]) == str, "sentiment column isn't a string data type"
+    
+    # check 2nd and 3rd columns are integer type
+    assert type(output['word_count'][1]) == np.int64, "word_count column isn't integer data type"
+    assert type(output['total_words'][1]) == np.int64, "total_words column isn't integer data type"
+
+    # branch test when drop_sentiment is True
+    output2 = tweepyclean.sentiment_total(tweets['text_only'], drop_sentiment = True)
+    assert output2['word_count'].min() == 1   # check that sentiments with words counts of 0 have been dropped
 
 
 def test_engagement_by_hour():

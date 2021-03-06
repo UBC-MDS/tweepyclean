@@ -168,7 +168,68 @@ def clean_tweets(tweets_df, handle = "", text_only = True, word_count = True, em
             tweets_df_new.at[i, 'proportion_favorites_vs_avg'] = tweets_df_new.at[i,'favorite_count'] / avg_favorites # New column
             
     return tweets_df_new
-  
+
+def tweet_words(clean_dataframe, top_n=1):	
+    """
+	Returns the most common words and counts from a list of tweets.
+    
+    The output is sorted descending by the count of words and in reverse
+    alphabetical order for any word ties.
+    
+	
+    Parameters
+	----------
+	clean_dataframe : pandas.DataFrame
+		A processed dataframe containing a user's tweet history and associated information
+	top_n : int
+		An integer representing the the number of most common words to display
+	
+    Returns
+	-------
+	pandas.DataFrame
+		A dataframe with one column containing individual words and a second column with the count of each word
+	
+    Examples:
+	--------
+	#>>> tweet_words(dataframe, 3)
+	pd.DataFrame(data = {'words' : ['best', 'apple', 'news'], 'count' : [102, 52, 24]}) 
+    """
+
+    # check input type of clean_dataframe
+    if not isinstance(clean_dataframe, pd.DataFrame):
+        raise TypeError("clean_dataframe should be of type pd.DataFrame")
+    
+    # check input of top_n
+    if not isinstance(top_n, int):
+        raise TypeError("top_n should be of type Int")
+    
+    # check if top_n is greater than 0
+    if top_n == 0:
+        raise ValueError("top_n must be greater than 0")
+        
+    # keep only the necessary column to count words
+    clean_text_column = 'text_only'
+    
+    split_words_df = clean_dataframe[clean_text_column].str.split().explode()
+    output = split_words_df.value_counts().to_frame()
+    
+    # index and column transformations
+    output['words'] = output.index
+    output.reset_index(inplace=True, drop=True)
+    output.rename(columns={'text_only': 'count'}, inplace=True)
+    output = output[['words', 'count']]
+    
+    # sort by alphabetical while preserving numerical sort
+    output = output.sort_values(['count', 'words'], ascending=False)
+    output.reset_index(inplace=True, drop=True)    
+    
+    # select top_n
+    if top_n >= output.shape[0]:
+        output = output
+    else:
+        output = output.iloc[0:top_n, :]
+    
+    return output
 
 def sentiment_total(data, drop_sentiment = False):
 

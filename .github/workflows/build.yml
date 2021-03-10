@@ -26,7 +26,7 @@ jobs:
       run: |
         pip install poetry
         poetry install
-        python -m nltk.downloader vader_lexicon
+        poetry run python -m nltk.downloader vader_lexicon
     - name: Test with pytest
       run: poetry run pytest #--cov=./ --cov-report=xml
 #    - name: Upload coverage to Codecov  

@@ -226,32 +226,32 @@ def clean_tweets(
 
 def tweet_words(clean_dataframe, top_n=1):
     """
-        Returns the most common words and counts from a list of tweets.
+    Returns the most common words and counts from a list of tweets.
 
     The output is sorted descending by the count of words and in reverse
     alphabetical order for any word ties.
 
 
     Parameters
-        ----------
-        clean_dataframe : pandas.DataFrame
-                A processed dataframe containing a user's
-                tweet history and associated information
-        top_n : int
-                An integer representing the the number of most common
-                words to display
+    ----------
+    clean_dataframe : pandas.DataFrame
+            A processed dataframe containing a user's
+            tweet history and associated information
+    top_n : int
+            An integer representing the the number of most common
+            words to display
 
     Returns
-        -------
-        pandas.DataFrame
-                A dataframe with one column containing individual
-                words and a second column with the count of each word
+    -------
+    pandas.DataFrame
+            A dataframe with one column containing individual
+            words and a second column with the count of each word
 
     Examples:
-        --------
-        #>>> tweet_words(dataframe, 3)
-        pd.DataFrame(data = {'words' : ['best', 'apple', 'news'],
-        'count' : [102, 52, 24]})
+    --------
+    #>>> tweet_words(dataframe, 3)
+    pd.DataFrame(data = {'words' : ['best', 'apple', 'news'],
+    'count' : [102, 52, 24]})
     """
 
     # check input type of clean_dataframe

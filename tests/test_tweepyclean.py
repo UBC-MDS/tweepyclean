@@ -5,10 +5,6 @@ from pytest import raises
 import numpy as np
 
 
-def test_version():
-    assert __version__ == '0.1.0'
-
-
 def load_raw_data():
     """Loads raw data used for testing"""
     raw_dataframe = pd.read_csv('tests/raw_df_example_tweets.csv')

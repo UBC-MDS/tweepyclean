@@ -4,6 +4,10 @@ version = "0.1.1"
 description = "Python package that builds ontop of the existing Tweepy package to provide data cleaning and processing functionality."
 authors = ["Your Name <you@example.com>"]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/UBC-MDS/tweepyclean"
+repository = "https://github.com/UBC-MDS/tweepyclean"
+documentation = 'https://tweepyclean.readthedocs.io'
 
 [tool.poetry.dependencies]
 

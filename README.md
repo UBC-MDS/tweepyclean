@@ -62,7 +62,7 @@ The official documentation is hosted on Read the Docs: <https://tweepyclean.read
 
 ## Contributors
 
-We welcome and recognize all contributions. You can see a list of current contributors in the [contributors tab]. This repository is currently maintained by [@nashmakh], [@calsvein], [@MattTPin], [@syak].
+We welcome and recognize all contributions. Please see contributing guidelines in the [Contributing](https://github.com/UBC-MDS/tweepyclean/blob/main/CONTRIBUTING.rst) document. This repository is currently maintained by [@nashmakh](https://github.com/nashmakh), [@calsvein](https://github.com/calsvein), [@MattTPin](https://github.com/MattTPin), [@syadk](https://github.com/syadk).
 
 ### Credits
 

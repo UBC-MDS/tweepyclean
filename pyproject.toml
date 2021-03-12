@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tweepyclean"
-version = "0.1.3"
+version = "0.1.4"
 description = "Python package that builds ontop of the existing Tweepy package to provide data cleaning and processing functionality."
 authors = ["Your Name <you@example.com>"]
 license = "MIT"

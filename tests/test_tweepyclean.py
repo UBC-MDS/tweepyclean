@@ -1,4 +1,3 @@
-from tweepyclean import __version__
 from tweepyclean import tweepyclean
 import pandas as pd
 from pytest import raises
